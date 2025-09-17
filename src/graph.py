@@ -22,8 +22,10 @@ llm = ChatGroq(model="llama-3.1-8b-instant", api_key=GROQ_API_KEY)
 
 class TestGenState(TypedDict):
     requirement: str
-    test_cases: List[str]
-    attempt: int  
+    sanity: List[str]
+    regression: List[str]
+    detailed: List[str]
+    all_tests: List[dict]
 
 def parse_requirement(state: TestGenState) -> TestGenState:
     """
