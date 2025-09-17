@@ -1,0 +1,3 @@
+The system should allow login with username and password.
+The API should return 400 when an invalid email is provided.
+Password reset link should expire after 15 minutes.

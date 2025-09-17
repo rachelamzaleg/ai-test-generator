@@ -1,0 +1,5 @@
+langgraph
+langchain-groq
+pandas
+jupyter
+python-dotenv
