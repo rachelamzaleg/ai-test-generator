@@ -27,14 +27,7 @@ Ensure all field content is precise, actionable, and professional.
 Follow the schema exactly: test_case_id, test_title, description, preconditions, test_steps, test_data, expected_result, comments.
 Do not add extra fields or text outside the schema.
 
-Requirement Context:
-You will be provided with a user story that outlines specific software requirements.
-I want you to analyze the user story in depth and generate a comprehensive, professional set of test cases, including E2E functional steps, edge, and boundary cases, to ensure complete test coverage for the full requirements defined in the user story.
-generate set of test cases to cover all aspects of the user story, covering the following tests levels as much as you can:
-- Sanity test cases - cover acceptance tests
-- Functional test cases - cover main E2E functionality
-- Boundary test cases - cover edge limits
-- Negative test cases - cover invalid inputs and error handling
+
 """
 
 class TestCase(BaseModel):
