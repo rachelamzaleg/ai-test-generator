@@ -1,54 +1,94 @@
-# AI Test Case Generator
 
-This project is an AI-powered test case generator that leverages LLMs (LangChain, Groq) and a graph-based workflow for prompt-driven test generation, validation, and export.
 
-## Features
-- **Prompt-driven test generation** using LLMs
-- **Graph-based workflow** with retry logic for invalid outputs
-- **Export test cases** in various formats
-- **Interactive prototyping** in Jupyter notebooks
+# AI Test Case Generator (Beginner QA Guide)
 
-## Project Structure
-- `src/`
-  - `graph.py`: Defines the workflow graph and state transitions
-  - `exporter.py`: Handles exporting test cases (format and destination logic)
-  - `__init__.py`: Module marker
-- `notebooks/`
-  - `demo.ipynb`: Main notebook for prototyping and running the workflow
-- `data/`, `outputs/`: For input requirements and generated test cases
-- `.github/copilot-instructions.md`: AI agent instructions and project conventions
+This project helps you (even if you’re new to QA or Python) automatically generate professional test cases from plain English requirements using AI.
 
-## How It Works
-- The workflow uses a `TestGenState` dict to track requirements, test cases, and retry attempts
-- Built with `langgraph.StateGraph`, with nodes for parsing requirements, generating test cases (via LLM), and retry logic for invalid JSON
-- LLM integration via `langchain_groq.ChatGroq` (model: llama-3.1-8b-instant)
-- API key is loaded from `.env` (see below)
+---
 
-## Getting Started
-1. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-2. **Set up your Groq API key**
-   - Create a `.env` file in the project root:
-     ```
-     GROQ_API_KEY=your_groq_api_key_here
-     ```
-3. **Run the workflow**
-   - Open `notebooks/demo.ipynb` and follow the cells to run the workflow interactively
+## What does it do?
 
-## Developer Notes
-- All workflow state is passed as a single dict (`TestGenState`)
-- LLM prompts are defined inline in node functions - this is temporarly
-- Retry logic is explicit: if JSON is invalid, the workflow can re-invoke the LLM up to `MAX_RETRIES` - STILL TO DO
-- Use pandas for tabular display in notebooks
-- For new export formats, extend `src/exporter.py` and update the notebook - TO DO 
+- Reads your requirement (user story) from a text file
+- Uses AI to create a full set of QA test cases (Sanity, Functional, Boundary, Negative)
+- Lets you review and export the test plan as a spreadsheet (CSV)
 
-## Example Usage
-See `notebooks/demo.ipynb` for a full example, including:
-- Setting up the workflow
-- Invoking with a sample requirement
-- Displaying results as a DataFrame
+---
+
+## Quick Start (Step-by-Step)
+
+### 1. Install Python and dependencies
+
+- Make sure you have Python 3.10+ installed (https://www.python.org/downloads/)
+- Open a terminal in the project folder and run:
+  ```bash
+  pip install -r requirements.txt
+  ```
+
+### 2. Get a Groq API key (for AI)
+
+- Sign up at https://console.groq.com/ and get your API key
+- Create a file named `.env` in the project folder with this line:
+  ```
+  GROQ_API_KEY=your_groq_api_key_here
+  ```
+
+### 3. Add your requirement
+
+- Open `data/requirements.txt` in a text editor
+- Write your user story or requirement (for example: “The system should allow login with username/password and enforce password complexity.”)
+
+### 4. Run the workflow in Jupyter (recommended for QA)
+
+- Open the project in VS Code or Jupyter Lab
+- Open `notebooks/demo.ipynb`
+- Run all cells (top to bottom)
+- You’ll see a table of generated test cases and a CSV file you can use in Excel or your test management tool
+
+---
+
+## Project Structure (What’s in each folder?)
+
+- `src/` – Python code for the workflow and exporting test cases
+- `notebooks/` – The main demo notebook for QA (run this!)
+- `data/` – Where you put your requirements
+- `outputs/` – Where your generated test cases will be saved
+
+---
+
+## QA Best Practices & Tips
+
+- **Review the generated test cases:**
+  - Make sure all requirement details are covered
+  - Check for missing edge cases or negative scenarios
+- **Customize the prompt:**
+  - You can edit the prompt in the notebook to match your company’s QA style
+- **Export and share:**
+  - Use the CSV output to import into Jira, TestRail, or share with your team
+- **Iterate:**
+  - If the test plan isn’t perfect, tweak your requirement or the prompt and re-run
+
+---
+
+## Troubleshooting (Common QA Issues)
+
+- **No test cases generated?**
+  - Check your API key and requirement file
+- **Error about prompt/model fields?**
+  - Make sure the fields in the prompt and the code match (e.g., test_case_id, test_title, etc.)
+- **Can’t export or open CSV?**
+  - Make sure you have write permissions to the `outputs/` folder
+
+---
+
+## Example Output
+
+| test_case_id | test_title | description | ... |
+|--------------|------------|-------------|-----|
+| 1            | Login with valid credentials | ... |
+| 2            | Login with invalid password  | ... |
+
+---
 
 ## License
+
 MIT License

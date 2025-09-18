@@ -3,3 +3,5 @@ langchain-groq
 pandas
 jupyter
 python-dotenv
+langchain
+pydantic

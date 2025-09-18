@@ -1,3 +1,27 @@
-The system should allow login with username and password.
-The API should return 400 when an invalid email is provided.
-Password reset link should expire after 15 minutes.
+User Story : DLP Copy/Paste Testing
+
+Title: Prevent unauthorized copy/paste of sensitive data
+
+As a Security Tester
+I want to test that Data Loss Prevention (DLP) policies block or monitor copy/paste actions involving sensitive data
+So that confidential information is not exfiltrated through clipboard operations
+
+Acceptance Criteria
+
+Copying sensitive data (e.g., credit card numbers, PII, source code) from a protected application must be blocked or logged.
+
+Pasting sensitive data into unauthorized destinations (e.g., personal email, external chat apps) must be blocked and generate an alert.
+
+All violations must generate alerts with details: user ID, application, timestamp, and data type.
+
+Approved applications (e.g., internal CRM, ticketing system) must allow copy/paste without false positives.
+
+Exceptions must be configurable for specific users or groups with business justification.
+
+Non-Functional Requirements
+
+Accuracy: Detection ≥ 95% with ≤ 3% false positives.
+
+Performance: Blocking must occur in real time (< 500ms).
+
+Compliance: Must align with organizational data classification and regulations (e.g., GDPR, HIPAA).
