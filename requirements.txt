@@ -7,3 +7,7 @@ langchain
 pydantic
 pytest-playwright
 pytest-asyncio
+playwright
+pytest
+selenium
+webdriver-manager
